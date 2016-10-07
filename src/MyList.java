@@ -8,10 +8,15 @@
  */
 public class MyList {
 
-  String[] array;
+  private class Node {
+	  private String data;
+	  private Node next;
+  }
+  
+  private Node head;
 
   public MyList() {
-    this.array = new String[0];
+    this.head = null;
   }
   
   /**
@@ -23,12 +28,10 @@ public class MyList {
     // Very bad implementation, make a new array with one more element than
     // the current array, add the element at index 0 and then copy over the
     // previous elements. The adjust this.array to point at the new array.
-    String[] newArray = new String[this.array.length + 1];
-    newArray[0] = element;
-    for (int i = 0; i < this.array.length; i++) {
-      newArray[i + 1] = this.array[i];
-    }
-    this.array = newArray;
+    Node newHead = new Node();
+    newHead.data = element;
+    newHead.next = this.head;
+    this.head = newHead;
   }
 
   /**
@@ -40,13 +43,8 @@ public class MyList {
     // Very bad implementation, make a new array with one less element than
     // copy over the elements from the current array starting at index 1.
     // Then adjust this.array to point at the new array.
-    if (this.array.length > 0) {
-      String[] newArray = new String[this.array.length - 1];
-      for (int i = 1; i < this.array.length; i++) {
-        newArray[i - 1] = this.array[i];
-      }
-      this.array = newArray;
+    if (this.head != null) {
+    	this.head = this.head.next;
     }
-
-  }
+}
 }
